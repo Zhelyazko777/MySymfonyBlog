@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<h1> Author: {{ article.author }}</h1>
+<h1>{{ article.title }}</h1>
+<p>{{ article.body }}</p>
+<p>{{ article.date | date("d.m.Y") }}</p>
+    <a href={{ path("delete_article", {'id': article.id}) }}>Delete</a><br>
+    <a href={{ path('article_edit', {"id": article.id}) }}>Edit</a><br>
+    <a href={{ path('articles_all') }}>Return</a>
+{% endblock %}
