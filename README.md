@@ -1,0 +1,2 @@
+# MySymfonyBlog
+BlogMadeWithSymfony
