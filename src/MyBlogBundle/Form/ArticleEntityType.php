@@ -3,6 +3,7 @@
 namespace MyBlogBundle\Form;
 
 use function PHPSTORM_META\type;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,6 +20,25 @@ class ArticleEntityType extends AbstractType
         $builder->add('title')
             ->add('body', TextareaType::class)
             ->add('author')
+            ->add('category', EntityType::class, [
+
+                'placeholder' => 'Choose a category',
+
+                'class' => 'MyBlogBundle:Category',
+
+                'choice_label' => 'name'
+
+            ])
+            ->add('tags', EntityType::class, [
+
+                'class' => 'MyBlogBundle\Entity\Tag',
+
+                'multiple' => true,
+
+                'expanded' => true,
+
+                'choice_label' => 'name'
+            ])
             ->add('save',SubmitType::class);
     }
     

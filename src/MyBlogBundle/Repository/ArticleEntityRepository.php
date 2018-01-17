@@ -10,4 +10,13 @@ namespace MyBlogBundle\Repository;
  */
 class ArticleEntityRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findArticlesByIdWithCategories(int $id)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT a, c FROM MyBlogBundle:ArticleEntity a 
+                                      JOIN a.category c WHERE a.id = $id");
+        $article = $query->getResult();
+        return $article[0];
+    }
+
 }

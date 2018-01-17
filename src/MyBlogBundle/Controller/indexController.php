@@ -5,7 +5,7 @@ namespace MyBlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class MyBlogController extends Controller
+class indexController extends Controller
 {
     /**
      * @Route("/")

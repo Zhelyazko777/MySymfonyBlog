@@ -10,6 +10,7 @@ namespace MyBlogBundle\Controller;
 
 
 use MyBlogBundle\Entity\ArticleEntity;
+use MyBlogBundle\Entity\Category;
 use MyBlogBundle\Form\ArticleEntityType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,9 +23,10 @@ class ArticleController extends Controller
      */
     public function ArticlesShowAction()
     {
-        $repo = $this->getDoctrine()->getRepository(ArticleEntity::class);
-        $articles = $repo->findAll();
-        return $this->render("articles/ArticlesAll.html.twig", ['articles' => $articles]);
+        $artcilesRepo = $this->getDoctrine()->getRepository(ArticleEntity::class);
+        $articles = $artcilesRepo->findAll();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        return $this->render("articles/ArticlesAll.html.twig", ['articles' => $articles, 'categories' => $categories]);
     }
 
     /**
@@ -34,7 +36,7 @@ class ArticleController extends Controller
      */
     public function ArticleShowById(int $id)
     {
-        $article = $this->getDoctrine()->getRepository(ArticleEntity::class)->find($id);
+        $article = $this->getDoctrine()->getRepository(ArticleEntity::class)->findArticlesByIdWithCategories($id);
         if ($article == null)
         {
             throw $this->createNotFoundException();
