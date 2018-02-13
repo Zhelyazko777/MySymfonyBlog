@@ -7,7 +7,17 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block head %}<h1 style="text-align: center">My Blog</h1>{% endblock %}
+        {% block head %}
+            <h1 style="text-align: center">My Blog</h1>
+            {% if app.user %}
+                <h1><a href="{{ path('user_logout') }}">logout</a></h1>
+                <a href={{ path('create_article') }}><h1>Create Article</h1></a>
+                <a href="{{ path('users_profile') }}"><h1>My Profile</h1></a>
+            {% else %}
+                <a href="{{ path('user_register') }}"><h1>Register</h1></a>
+                <a href="{{ path('user_login') }}"><h1>Login</h1></a>
+            {% endif %}
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

@@ -2,6 +2,8 @@
 
 namespace MyBlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,7 +36,15 @@ class Category
     private $articles;
 
     /**
-     * @return mixed
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection
      */
     public function getArticles()
     {

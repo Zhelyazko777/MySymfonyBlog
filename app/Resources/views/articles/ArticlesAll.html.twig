@@ -7,9 +7,8 @@
         <a href={{ path("article_id", {'id': article.id}) }}>show more</a>
         <p>--------------------------------------------------------------------------------------------</p>
     {% endfor %}
-    <a href="#"><h1>Register</h1></a> <a href="#"><h1>Login</h1></a> <a href={{ path('create_article') }}><h1>Create Article</h1></a>
     <h1 style="text-align: center">Categories:</h1>
     {% for category in categories %}
-        <h2>{{ category.name }}</h2>
+        <a href="{{ path('articles_category', {'id': category.id}) }}"><h2>{{ category.name }}</h2></a>
     {% endfor %}
 {% endblock %}

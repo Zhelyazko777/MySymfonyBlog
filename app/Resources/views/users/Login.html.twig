@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% if error %}
+        {{ error.message }}
+    {% endif %}
+    <h1 style="text-align: center">Login</h1>
+    <form style="text-align: center", method="post">
+        Username: <input type="text", name="_username"><br>
+        Password: <input type="password", name="_password"><br>
+        <input type="submit", value="Login!">
+    </form>
+{% endblock %}

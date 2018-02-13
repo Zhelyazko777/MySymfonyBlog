@@ -24,9 +24,9 @@ class Role
     /**
      * @var string
      *
-     * @ORM\Column(name="Role", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $role;
+    private $name;
 
 
     /**
@@ -40,27 +40,27 @@ class Role
     }
 
     /**
-     * Set role
+     * Set name
      *
-     * @param string $role
+     * @param string $name
      *
      * @return Role
      */
-    public function setRole($role)
+    public function setName($name)
     {
-        $this->role = $role;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get role
+     * Get name
      *
      * @return string
      */
-    public function getRole()
+    public function getName()
     {
-        return $this->role;
+        return $this->name;
     }
 }
 

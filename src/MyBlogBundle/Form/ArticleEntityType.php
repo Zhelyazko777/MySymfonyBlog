@@ -19,7 +19,6 @@ class ArticleEntityType extends AbstractType
     {
         $builder->add('title')
             ->add('body', TextareaType::class)
-            ->add('author')
             ->add('category', EntityType::class, [
 
                 'placeholder' => 'Choose a category',

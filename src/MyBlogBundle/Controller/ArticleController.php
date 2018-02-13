@@ -13,6 +13,7 @@ use MyBlogBundle\Entity\ArticleEntity;
 use MyBlogBundle\Entity\Category;
 use MyBlogBundle\Form\ArticleEntityType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,7 +27,8 @@ class ArticleController extends Controller
         $artcilesRepo = $this->getDoctrine()->getRepository(ArticleEntity::class);
         $articles = $artcilesRepo->findAll();
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-        return $this->render("articles/ArticlesAll.html.twig", ['articles' => $articles, 'categories' => $categories]);
+        return $this->render("articles/ArticlesAll.html.twig", ['articles' => $articles,
+                                                           'categories' => $categories]);
     }
 
     /**
@@ -50,12 +52,14 @@ class ArticleController extends Controller
     /**
      * @Route("article/create", name="create_article")
      * @param $request
+     * @Security("has_role('ROLE_USER')")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function ArticleCreate(Request $request)
     {
         $article = new ArticleEntity();
         $article->setDate(new \DateTime());
+        $article->setAuthor(($this->getUser()->getUsername()));
         $form = $this->createForm(ArticleEntityType::class, $article);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
@@ -113,6 +117,28 @@ class ArticleController extends Controller
                 return $this->redirectToRoute("articles_all");
             }
             return $this->render("articles/ArticleUpdate.html.twig", ["form" => $form->createView()]);
+        }
+    }
+
+    /**
+     * @Route("/articles/showByCategs/{id}", name="articles_category")
+     * @param int $id
+     * @return null
+     */
+    public function ArticlesShowByCategories(int $id)
+    {
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        $articles = $category->getArticles();
+        $allCategories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $category = $category->getName();
+        if(count($articles) == 0){
+            return $this->render("articles/CleanCategory.html.twig", ['categories' => $allCategories,
+                                                                           'category' => $category]);
+        }
+        else{
+        return $this->render("articles/ArticlesByCategory.html.twig", ['articles' => $articles,
+                                                                            'category' => $category,
+                                                                            'categories' => $allCategories]);
         }
     }
 }

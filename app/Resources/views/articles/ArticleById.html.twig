@@ -3,7 +3,7 @@
 <h1> Author: {{ article.author }}</h1>
 <h1>Title: {{ article.title }}</h1>
 <h1>Category: {{ article.category.name }}</h1>
-<p>ArticleBody: {{ article.body }}</p>
+    <p><strong>ArticleBody: </strong><br>{{ article.body }}</p>
     <h1>Tags: </h1>
     {% if article.tags | length == 0 %}
         <p>There is no tags!</p>

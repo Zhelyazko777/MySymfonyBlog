@@ -1,11 +1,16 @@
 # To get started with security, check out the documentation:
 # https://symfony.com/doc/current/security.html
 security:
+    encoders:
+        MyBlogBundle\Entity\User:
+           algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        OwnProvider:
+          entity:
+             class: MyBlogBundle:User
+             property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -16,9 +21,18 @@ security:
         main:
             anonymous: ~
             # activate different ways to authenticate
-
+            pattern: ^/
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
             #http_basic: ~
 
+            provider: OwnProvider
             # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+            form_login:
+                login_path: /login
+                check_path: /login
+                default_target_path: /articles
+            logout:
+                path:   /logout
+                target: /articles
+    access_control:
+            - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{%  block body %}
+    {% block article %}
+    <h1 style="text-align: center">{{ category }}</h1>
+    {% for article in articles %}
+    <h1>{{ article.title }}</h1>
+        <p><strong>{{ article.body }}</strong></p>
+        <p>{{ article.date | date("d.m.Y")}}</p><br>
+        <a href={{ path("article_id", {'id': article.id}) }}>show more</a><br>
+        <p>-------------------------------------------------------------------------------------------------</p>
+    {% endfor %}
+    {% endblock %}
+    {% for category in categories %}
+        <a href="{{ path('articles_category', {'id': category.id}) }}"><h2>{{ category.name }}</h2></a>
+    {% endfor %}
+{% endblock %}
