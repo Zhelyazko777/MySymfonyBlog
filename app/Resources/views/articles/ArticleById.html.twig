@@ -1,19 +1,34 @@
 {% extends "base.html.twig" %}
 {% block body %}
-<h1> Author: {{ article.author }}</h1>
-<h1>Title: {{ article.title }}</h1>
-<h1>Category: {{ article.category.name }}</h1>
-    <p><strong>ArticleBody: </strong><br>{{ article.body }}</p>
-    <h1>Tags: </h1>
-    {% if article.tags | length == 0 %}
-        <p>There is no tags!</p>
-    {% else %}
-        {% for tag in article.tags %}
-            <p> - {{ tag.name }}</p>
-        {% endfor %}
-    {% endif %}
-<p><strong>Date: </strong>{{ article.date | date("d.m.Y") }}</p>
-    <a href={{ path("delete_article", {'id': article.id}) }}>Delete</a><br>
-    <a href={{ path('article_edit', {"id": article.id}) }}>Edit</a><br>
-    <a href={{ path('articles_all') }}>Return</a>
+    <div class="container text-center" id="article_id_box">
+        <h1> Автор: {{ article.author }}</h1>
+        <h1>Заглавие: {{ article.title }}</h1>
+        <h1>Категория: {{ article.category.name }}</h1>
+            <p><strong>статия: </strong><br>{{ article.body }}</p>
+            <h1>Тагове: </h1>
+            {% if article.tags | length == 0 %}
+                <p>Няма тагове!</p>
+            {% else %}
+                {% for tag in article.tags %}
+                    <p> - {{ tag.name }}</p>
+                {% endfor %}
+            {% endif %}
+        <p><strong>Дата: </strong>{{ article.date | date("d.m.Y") }}</p>
+
+    <div class="container" id="article_show_id_btns">
+        {% if app.user %}
+            {% if app.user.username == article.author %}
+                <form action="{{ path("delete_article", {'id': article.id}) }}">
+                <button class=" customBtn col-lg-12 btn btn-danger">Изтрии</button>
+                </form>
+                <form action="{{ path("article_edit", {'id': article.id}) }}">
+                    <button class=" customBtn col-lg-12 btn btn-danger">Редактирай</button>
+                </form>
+            {% endif %}
+        {% endif %}
+        <form action="{{ path("articles_all", {'id': article.id}) }}">
+            <button class=" customBtn col-lg-12 btn btn-danger">Назад</button>
+        </form>
+    </div>
+    </div>
 {% endblock %}

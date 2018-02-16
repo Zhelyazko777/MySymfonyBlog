@@ -83,6 +83,12 @@ class ArticleController extends Controller
         {
             throw $this->createNotFoundException();
         }
+        elseif ($this->getUser() == null){
+            return $this->redirectToRoute("article_id", ["article" => $article, "id" => $id]);
+        }
+        elseif ($this->getUser()->getUsername() != $article->getAuthor()){
+            return $this->redirectToRoute("article_id", ["article" => $article, "id" => $id]);
+        }
         else
         {
             $em = $this->getDoctrine()->getManager();
@@ -105,6 +111,12 @@ class ArticleController extends Controller
         {
             throw $this->createNotFoundException();
         }
+        elseif ($this->getUser() == null){
+            return $this->redirectToRoute("article_id", ["article" => $article, "id" => $id]);
+        }
+        elseif ($this->getUser()->getUsername() != $article->getAuthor()){
+            return $this->redirectToRoute("article_id", ["article" => $article, "id" => $id]);
+        }
         else
         {
             $form = $this->createForm(ArticleEntityType::class, $article);
@@ -116,7 +128,7 @@ class ArticleController extends Controller
                 $em->flush();
                 return $this->redirectToRoute("articles_all");
             }
-            return $this->render("articles/ArticleUpdate.html.twig", ["form" => $form->createView()]);
+            return $this->render("articles/ArticleUpdate.html.twig", ["form" => $form->createView(), "article" => $article]);
         }
     }
 

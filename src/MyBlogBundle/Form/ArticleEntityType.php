@@ -21,7 +21,7 @@ class ArticleEntityType extends AbstractType
             ->add('body', TextareaType::class)
             ->add('category', EntityType::class, [
 
-                'placeholder' => 'Choose a category',
+                'placeholder' => 'Избери категория',
 
                 'class' => 'MyBlogBundle:Category',
 

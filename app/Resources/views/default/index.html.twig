@@ -1,7 +1,59 @@
 {% extends "base.html.twig" %}
+{% block head %}
+{% endblock %}
+{% block navbar %}
+{% endblock %}
 {% block body %}
-    <h1>My First Blog</h1>
-    <a href={{ path('articles_all') }}>Tova sa statiite </a>
+    <div class="container customContainer text-center">
+        <div class="row rowCustom">
+        <div class="col-lg-12 header text-light"><h1><strong>My Blog</strong></h1></div>
+        {% if app.user %}
+            <div class=" button col-lg-12 col-sm-12 text-truncate">
+                <form action="{{ path('create_article') }}">
+                    <button class="btn btn-outline-light homeButton">
+                        <h4>Създай статия</h4>
+                    </button>
+                </form>
+            </div>
+            <div class=" button col-lg-12 col-sm-12 text-truncate">
+                <form action="{{ path('users_profile') }}">
+                    <button class="btn btn-outline-light homeButton">
+                        <h4>Профил</h4>
+                    </button>
+                </form>
+            </div>
+            <div class=" button col-lg-12 col-sm-12 text-truncate">
+                <form action="{{ path('user_logout') }}">
+                    <button class="btn btn-outline-light homeButton">
+                        <h4>Изход</h4>
+                    </button>
+                </form>
+            </div>
+        {% else %}
+            <div class=" button col-lg-12 col-sm-12 text-truncate">
+                <form action="{{ path('user_register') }}">
+                    <button class="btn btn-outline-light homeButton">
+                        <h4>Регистрирай се!</h4>
+                    </button>
+                </form>
+            </div>
+            <div class=" button col-lg-12 col-sm-12">
+                <form action="{{ path('user_login') }}">
+                <button class="btn btn-outline-light homeButton">
+                    <h4>Вход</h4>
+                </button>
+                </form>
+            </div>
+        {% endif %}
+            <div class=" button col-lg-12 col-sm-12">
+                <form action="{{ path('articles_all') }}">
+                    <button class="btn btn-outline-light homeButton">
+                        <h4>Продължи към статиите</h4>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

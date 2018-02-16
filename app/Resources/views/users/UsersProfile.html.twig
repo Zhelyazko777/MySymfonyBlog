@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    {% if app.user != null %}
-        <p>------------------------------------------------------------------------------------------------</p>
-        <strong>Username: </strong>{{ user.username }}<br>
-        <strong>Email: </strong>{{ user.email }}<br>
-        <strong>Name: </strong>{{ user.fullName }}<br>
-    <strong>Age: </strong>{{ user.age }}
-        <p>------------------------------------------------------------------------------------------------</p>
-    {% endif %}
+    <div class="container text-center" id="profile_box">
+        {% if app.user != null %}
+            <strong>Потребителско име: </strong>{{ user.username }}<br>
+            <strong>Имейл: </strong>{{ user.email }}<br>
+            <strong>Име: </strong>{{ user.fullName }}<br>
+            <strong>Възраст: </strong>{{ user.age }}
+        {% endif %}
+    </div>
 {% endblock %}

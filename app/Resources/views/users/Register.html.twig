@@ -1,5 +1,39 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1 style="text-align: center">Register</h1>
-    {{ form(form) }}
+
+    <div class="container customContainer" id="registerBox">
+        <form class="form-horizontal" action="{{ path('user_register') }}" method="post" name="kolio">
+            <legend class="legend">Регистрация</legend>
+            <div class="form-group">
+                <label for="username" class="control-label form_text">Потребителско име:</label>
+                <input type="text" id="username" class="form-control col-lg-5 form_field" placeholder="Потребителско име" name="user[username]">
+            </div>
+            <div class="form-group">
+                <label for="passwd" class="control-label form_text">Парола:</label>
+                <input type="password" id="passwd" class="form-control col-lg-5 form_field" placeholder="Парола" name="user[plainPassword][first]">
+            </div>
+            <div class="form-group">
+                <label for="passwdConf" class="control-label form_text">Потвърдете паролата:</label>
+                <input type="password" id="passwdConf" class="form-control col-lg-5 form_field" placeholder="Потвърдете паролата" name="user[plainPassword][second]">
+            </div>
+            <div class="form-group">
+                <label for="email" class="control-label form_text">Имейл:</label>
+                <input type="email" id="email" class="form-control col-lg-5 form_field" placeholder="Имейл" name="user[email]">
+            </div>
+            <div class="form-group">
+                <label for="fullName" class="control-label form_text">Име и фамилия:</label>
+                <input type="text" id="fullName" class="form-control col-lg-5 form_field" placeholder="Име" name="user[fullName]">
+            </div>
+            <div class="form-group">
+                <label for="age" class="control-label form_text">Възраст:</label>
+                <input type="text" id="age" class="form-control col-lg-5 form_field" placeholder="Възраст" name="user[age]">
+            </div>
+
+            {{ form_row(form._token) }}
+
+            <div>
+                <button type="submit" name="Submit" class="btn btn-outline-light submit">Регистрирай се!</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}

@@ -1,14 +1,21 @@
 {%  extends "base.html.twig" %}
 {%  block body %}
+    <div class="container" id="categories">
+        <div class="row">
+            {% for category in categories %}
+                <form class="col-lg-4" action="{{ path('articles_category', {'id': category.id}) }}">
+                    <button class="categ_btn btn btn-danger">{{ category.name }}</button>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
     {% for article in articles %}
-        <h1>{{ article.title }}</h1>
-        <h4>{{ article.body }}</h4>
-        <p>Date: {{ article.date | date("d.m.Y")}}</p>
-        <a href={{ path("article_id", {'id': article.id}) }}>show more</a>
-        <p>--------------------------------------------------------------------------------------------</p>
-    {% endfor %}
-    <h1 style="text-align: center">Categories:</h1>
-    {% for category in categories %}
-        <a href="{{ path('articles_category', {'id': category.id}) }}"><h2>{{ category.name }}</h2></a>
+        <h1 class="">{{ article.title }}</h1>
+        <h4 class="">{{ article.body }}</h4>
+        <p class="">Date: {{ article.date | date("d.m.Y")}}</p>
+        <form action="{{ path('article_id', {'id': article.id}) }}">
+            <button class="btn btn-danger">Покажи</button>
+        </form>
+        <p>--------------------------------------------------------------------------------------------------------------</p>
     {% endfor %}
 {% endblock %}

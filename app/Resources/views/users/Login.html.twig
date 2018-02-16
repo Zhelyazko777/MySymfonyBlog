@@ -1,13 +1,20 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {% if error %}
-        {{ error.message }}
-    {% endif %}
-    <h1 style="text-align: center">Login</h1>
-    <form style="text-align: center", method="post">
-        Username: <input type="text", name="_username"><br>
-        Password: <input type="password", name="_password"><br>
-        <input type="submit", value="Login!">
+<div class="container customContainer" id="loginBox">
+    <form class="form-horizontal" action="{{ path('user_login') }}" method="post">
+        <legend class="legend">Вход</legend>
+        <div class="form-group">
+            <label class="col-lg-5 control-label form_text" for="user_email">Потребителско име:</label>
+            <input type="text" class="col-lg-5 form-control form_field" id="user_email" placeholder="Потребителско име" name="_username">
+        </div>
+        <div class="form-group">
+            <label class="col-lg-5 control-label form_text" for="password">Парола:</label>
+            <input type="password" class=" col-lg-5 form-control form_field" id="password" placeholder="Парола" name="_password">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-light submit">Влез!</button>
+        </div>
     </form>
+</div>
 {% endblock %}

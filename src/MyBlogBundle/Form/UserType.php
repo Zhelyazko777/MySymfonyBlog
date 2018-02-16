@@ -26,7 +26,7 @@ class UserType extends AbstractType
                 ->add('email', EmailType::class)
                 ->add('fullName')
                 ->add('age')
-                ->add('submit', SubmitType::class);
+                ->add('Submit', SubmitType::class);
     }
     
     /**
@@ -38,14 +38,5 @@ class UserType extends AbstractType
             'data_class' => 'MyBlogBundle\Entity\User'
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'myblogbundle_user';
-    }
-
 
 }

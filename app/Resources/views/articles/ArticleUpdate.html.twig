@@ -1,6 +1,29 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <h1>Tuk promeni swoqta statiq</h1>
-    {{ form(form) }}
+    <div class="container customContainer" id="article_create_box">
+        <form class="form-horizontal" action="{{ path('article_edit', {'id': article.id})}}" method="post">
+            <legend class="legend">Промени статията</legend>
+            <div class="form-group article_form_text">
+                <label class="col-lg-5" for="article_title">Заглавие:</label>
+                <input class="form-control" value="{{ article.title }}" id="article_title" name="myblogbundle_articleentity[title]">
+            </div>
+            <div class="form-group article_form_text">
+                <label class="col-lg-5" for="article_body">Статия:</label>
+                <textarea class="form-control" id="article_body" rows="6" name="myblogbundle_articleentity[body]">{{ article.body }}</textarea>
+            </div>
+            <div class="form-group article_form_text">
+                {{ form_label(form.category, " ") }}
+                {{ form_widget(form.category) }}
+            </div>
+            <div class="form-group article_form_text">
+                {{ form_label(form.tags, "Тагове:") }}
+                {{ form_widget(form.tags) }}
+            </div>
+            {{ form_row(form._token) }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-light">Създай</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 

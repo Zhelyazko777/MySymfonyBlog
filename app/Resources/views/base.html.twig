@@ -1,23 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}{% endblock %}</title>
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/customStyles.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block head %}
-            <h1 style="text-align: center">My Blog</h1>
-            {% if app.user %}
-                <h1><a href="{{ path('user_logout') }}">logout</a></h1>
-                <a href={{ path('create_article') }}><h1>Create Article</h1></a>
-                <a href="{{ path('users_profile') }}"><h1>My Profile</h1></a>
-            {% else %}
-                <a href="{{ path('user_register') }}"><h1>Register</h1></a>
-                <a href="{{ path('user_login') }}"><h1>Login</h1></a>
-            {% endif %}
-        {% endblock %}
+    {% block navbar %}
+        <div class="container-fluid">
+            <div class="row rowCustom">
+
+                {% if app.user %}
+                    <div class="col-lg-8">
+                        <a id="logo" class="text-light" href="{{ path('index') }}"><h2><strong>My Blog</strong></h2></a>
+                    </div>
+                    <div class="col-lg-2" >
+                        <form action="{{ path('create_article') }}">
+                            <button  class="btn btn-outline-light logoButton">Създай статия</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-1" >
+                        <form action="{{ path('users_profile') }}">
+                            <button  class="btn btn-outline-light logoButton">Профил</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-1" >
+                        <form action="{{ path('user_logout') }}">
+                            <button  class="btn btn-outline-light logoButton">Излез</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="col-lg-9">
+                        <a id="logo" class="text-light" href="{{ path('index') }}"><h2><strong>My Blog</strong></h2></a>
+                    </div>
+                    <div class="col-lg-1" >
+                        <form action="{{ path('user_login') }}">
+                            <button  class="btn btn-outline-light logoButton">Вход</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-2">
+                        <form action="{{ path('user_register') }}">
+                            <button class="btn btn-outline-light logoButton">Регестрирай се!</button>
+                        </form>
+                    </div>
+                {%  endif %}
+            </div>
+        </div>
+    {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

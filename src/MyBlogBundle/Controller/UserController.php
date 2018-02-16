@@ -29,7 +29,7 @@ class UserController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPassword());
+                ->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             $roleRepository = $this->getDoctrine()->getRepository(Role::class);
             $userRole = $roleRepository->findOneBy(['name' => 'ROLE_USER']);
